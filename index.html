@@ -3,54 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTBAZAAR | B2B EV Marketplace</title>
+    <title>VOLTBAZAAR | B2B EV Components Marketplace</title>
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            --accent-cyan: #06b6d4;
-            --success-green: #10b981;
+            --bg-dark: #0b0f19;
+            --surface-dark: #161e2e;
+            --surface-card: #1f293d;
+            --surface-hover: #28354d;
+            --border: #2d3b55;
+            
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.25);
+            --accent-cyan: #38bdf8;
+            --success: #10b981;
             --khata-gradient: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-            --bg-dark: #0f172a;
-            --bg-light: #f1f5f9;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #cbd5e1;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background-color: var(--bg-light);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- HEADER & NAVIGATION --- */
+        /* --- HEADER & NAV --- */
         header {
-            background: var(--bg-dark);
-            color: #ffffff;
-            padding: 1.2rem 2rem;
+            background: rgba(22, 30, 46, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1.1rem 2rem;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 90;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .brand-logo h1 {
-            font-size: 1.8rem;
+        .brand h1 {
+            font-size: 1.75rem;
             font-weight: 900;
             letter-spacing: 1.5px;
             background: linear-gradient(90deg, #38bdf8, #818cf8);
@@ -58,11 +63,11 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .brand-logo p {
+        .brand p {
             font-size: 0.75rem;
-            color: #94a3b8;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
         }
 
         nav {
@@ -73,21 +78,21 @@
         }
 
         nav button {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-main);
             padding: 0.6rem 1.25rem;
             border-radius: 50px;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s ease;
         }
 
         nav button:hover, nav button.active-nav {
-            background: #ffffff;
-            color: var(--bg-dark);
-            box-shadow: 0 0 10px rgba(255,255,255,0.3);
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
         }
 
         .khata-badge {
@@ -97,27 +102,32 @@
             border-radius: 50px;
             font-weight: 800;
             font-size: 0.9rem;
-            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
         /* --- HERO BANNER --- */
         .hero {
-            background: var(--primary-gradient);
-            color: #ffffff;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.15) 0%, rgba(11, 15, 25, 0) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             padding: 2.5rem 1.5rem;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
         }
 
         .hero h2 {
             font-size: 2.2rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             font-size: 1.05rem;
-            opacity: 0.95;
+            color: var(--text-muted);
         }
 
         /* --- MAIN CONTAINER --- */
@@ -132,22 +142,44 @@
         .page { display: none; }
         .page.active { display: block; }
 
-        /* --- CATEGORY PILLS --- */
+        /* --- SEARCH & CATEGORIES --- */
+        .search-container {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--surface-dark);
+            border: 1.5px solid var(--border);
+            color: var(--text-main);
+            padding: 1rem 1.25rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
         .category-scroll {
             display: flex;
             gap: 0.75rem;
             overflow-x: auto;
             padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .cat-pill {
-            background: #ffffff;
+            background: var(--surface-dark);
             border: 1px solid var(--border);
             padding: 0.6rem 1.4rem;
             border-radius: 50px;
             font-size: 0.9rem;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--text-muted);
             cursor: pointer;
             white-space: nowrap;
@@ -155,42 +187,43 @@
         }
 
         .cat-pill:hover, .cat-pill.active-cat {
-            background: var(--bg-dark);
-            color: #ffffff;
-            border-color: var(--bg-dark);
+            background: var(--surface-hover);
+            color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
         }
 
-        /* --- PRODUCT CARDS --- */
+        /* --- PRODUCT GRID & CARDS --- */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
             gap: 1.5rem;
         }
 
         .card {
-            background: var(--card-bg);
+            background: var(--surface-card);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 24px -5px rgba(0, 0, 0, 0.1);
-            border-color: #a5b4fc;
+            border-color: var(--primary);
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px var(--primary-glow);
         }
 
         .category-tag {
             font-size: 0.75rem;
             font-weight: 800;
             text-transform: uppercase;
-            color: #4f46e5;
-            background: #e0e7ff;
-            padding: 0.3rem 0.75rem;
+            color: var(--accent-cyan);
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 0.25rem 0.75rem;
             border-radius: 50px;
             width: fit-content;
             margin-bottom: 0.75rem;
@@ -200,26 +233,69 @@
             font-size: 1.15rem;
             margin-bottom: 0.5rem;
             color: var(--text-main);
+            line-height: 1.4;
         }
 
         .card p.desc {
             font-size: 0.875rem;
             color: var(--text-muted);
             margin-bottom: 1rem;
-            line-height: 1.4;
+            line-height: 1.5;
             flex-grow: 1;
         }
 
+        /* Manufacturer Info Row */
+        .manufacturer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .mfr-name {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .info-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--accent-cyan);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .info-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+        }
+
         .price-box {
-            background: #f8fafc;
+            background: var(--surface-dark);
             padding: 0.85rem;
             border-radius: 10px;
-            border: 1px solid #f1f5f9;
+            border: 1px solid var(--border);
             margin-bottom: 1rem;
         }
 
         .price-single {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             color: var(--text-main);
         }
@@ -227,54 +303,59 @@
         .price-bulk {
             font-size: 0.85rem;
             font-weight: 800;
-            color: var(--success-green);
-            margin-top: 0.25rem;
+            color: var(--success);
+            margin-top: 0.3rem;
         }
 
         .btn-add {
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
             color: #ffffff;
             border: none;
-            padding: 0.8rem;
+            padding: 0.85rem;
             width: 100%;
             border-radius: 10px;
-            font-weight: 800;
+            font-weight: 700;
             font-size: 0.95rem;
             cursor: pointer;
             transition: opacity 0.2s;
+            box-shadow: 0 4px 12px var(--primary-glow);
         }
 
-        .btn-add:hover { opacity: 0.92; }
+        .btn-add:hover { opacity: 0.9; }
 
-        /* --- PROFILE --- */
+        /* --- USER PROFILE PAGE --- */
         .profile-card {
             max-width: 550px;
             margin: 0 auto;
-            background: #ffffff;
+            background: var(--surface-card);
             padding: 2.2rem;
             border-radius: 16px;
             border: 1px solid var(--border);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .form-group { margin-bottom: 1.25rem; }
-        .form-group label { display: block; font-weight: 700; margin-bottom: 0.4rem; font-size: 0.9rem; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 0.4rem; font-size: 0.9rem; color: var(--text-main); }
+        
         .form-group input, .form-group textarea {
             width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 0.85rem 1rem;
+            background: var(--surface-dark);
             border: 1.5px solid var(--border);
+            color: var(--text-main);
             border-radius: 8px;
             font-size: 0.95rem;
             outline: none;
         }
-        .form-group input:focus, .form-group textarea:focus { border-color: #4f46e5; }
+
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
 
         .btn-flex { display: flex; gap: 0.5rem; }
 
         .btn-dark {
-            background: var(--bg-dark);
+            background: var(--surface-dark);
+            border: 1px solid var(--border);
             color: #ffffff;
-            border: none;
             padding: 0.75rem 1.2rem;
             border-radius: 8px;
             font-weight: 700;
@@ -282,9 +363,12 @@
             white-space: nowrap;
         }
 
+        .btn-dark:hover { background: var(--surface-hover); }
+
         .verified-badge {
-            color: #15803d;
-            background: #dcfce7;
+            color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
             padding: 0.4rem 0.8rem;
             border-radius: 6px;
             font-weight: 800;
@@ -293,10 +377,11 @@
             font-size: 0.85rem;
         }
 
-        /* --- CART --- */
+        /* --- CART & CHECKOUT --- */
         .cart-list { display: flex; flex-direction: column; gap: 1rem; }
+
         .cart-item {
-            background: #ffffff;
+            background: var(--surface-card);
             padding: 1.25rem;
             border-radius: 12px;
             border: 1px solid var(--border);
@@ -311,14 +396,16 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            background: var(--bg-light);
+            background: var(--surface-dark);
             padding: 0.3rem 0.6rem;
             border-radius: 8px;
+            border: 1px solid var(--border);
         }
 
         .qty-btn {
-            background: #ffffff;
+            background: var(--surface-hover);
             border: 1px solid var(--border);
+            color: white;
             width: 30px;
             height: 30px;
             border-radius: 6px;
@@ -327,7 +414,7 @@
         }
 
         .cart-summary {
-            background: #ffffff;
+            background: var(--surface-card);
             padding: 1.5rem;
             border-radius: 12px;
             border: 1px solid var(--border);
@@ -339,27 +426,101 @@
             gap: 1rem;
         }
 
+        .payment-select {
+            background: var(--surface-dark);
+            color: var(--text-main);
+            padding: 0.85rem;
+            border-radius: 8px;
+            border: 1.5px solid var(--border);
+            font-weight: 700;
+            outline: none;
+        }
+
         .bulk-tag {
-            background: #dcfce7;
-            color: #15803d;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
             font-weight: 800;
             font-size: 0.75rem;
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             margin-left: 0.4rem;
         }
+
+        /* --- MODAL POPUP --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .close-modal:hover { color: var(--text-main); }
+
+        .mfr-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+            background: var(--surface-dark);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .mfr-detail-item label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .mfr-detail-item span {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="brand-logo">
+        <div class="brand">
             <h1>VOLTBAZAAR</h1>
-            <p>B2B Electric Mobility Supply Hub</p>
+            <p>B2B Electric Mobility Marketplace</p>
         </div>
         <nav>
-            <button onclick="navigate('shop')" id="nav-shop" class="active-nav">Catalog</button>
-            <button onclick="navigate('profile')" id="nav-profile">Profile</button>
+            <button onclick="navigate('shop')" id="nav-shop" class="active-nav">Catalogue</button>
+            <button onclick="navigate('profile')" id="nav-profile">User Profile</button>
             <button onclick="navigate('cart')" id="nav-cart">Cart (<span id="cart-count">0</span>)</button>
             <div class="khata-badge">
                 ⚡ VoltKhata: ₹<span id="khata-limit">50,000</span>
@@ -369,27 +530,32 @@
 
     <div class="hero">
         <h2>Wholesale EV Powertrains & Components</h2>
-        <p>Dynamic Wholesale Discounts Automatically Applied on Bulk Orders (>5 Units)</p>
+        <p>Instant Tiered Bulk Pricing Automatically Applied on Orders >5 Units</p>
     </div>
 
     <main>
         <section id="shop-page" class="page active">
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="🔍 Search products by name, category, or manufacturer..." oninput="handleSearch()">
+            </div>
+
             <div class="category-scroll" id="category-pills"></div>
+
             <div id="product-list" class="grid"></div>
         </section>
 
         <section id="profile-page" class="page">
             <div class="profile-card">
-                <h2 style="margin-bottom: 1.25rem;">Retailer Profile</h2>
+                <h2 style="margin-bottom: 1.25rem;">User Information</h2>
                 <div class="form-group">
-                    <label>Business / Retailer Name</label>
-                    <input type="text" id="prof-name" placeholder="e.g. Apex ElectroMobility Pvt Ltd">
+                    <label>User / Enterprise Name</label>
+                    <input type="text" id="prof-name" placeholder="e.g. Alex Rivera">
                 </div>
 
                 <div class="form-group">
                     <label>Mobile Number (OTP Verification Required)</label>
                     <div class="btn-flex">
-                        <input type="tel" id="prof-phone" placeholder="Enter 10-digit mobile number">
+                        <input type="tel" id="prof-phone" placeholder="Enter 10-digit phone number">
                         <button class="btn-dark" onclick="requestOTP()" id="btn-request-otp">Send OTP</button>
                     </div>
                     <div id="verified-badge" class="verified-badge" style="display:none;">
@@ -397,8 +563,8 @@
                     </div>
                 </div>
 
-                <div class="form-group" id="otp-section" style="display:none; background: #e0f2fe; padding: 1rem; border-radius: 8px;">
-                    <label style="color:#0369a1;">Enter OTP (Use Test Code: <strong>1234</strong>)</label>
+                <div class="form-group" id="otp-section" style="display:none; background: var(--surface-dark); padding: 1rem; border-radius: 8px; border: 1px solid var(--border);">
+                    <label style="color: var(--accent-cyan);">Enter Security OTP (Test Code: <strong>1234</strong>)</label>
                     <div class="btn-flex" style="margin-top: 0.4rem;">
                         <input type="text" id="prof-otp" placeholder="1234">
                         <button class="btn-dark" onclick="verifyOTP()">Verify OTP</button>
@@ -406,36 +572,66 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Warehouse Delivery Address</label>
+                    <label>Delivery Address</label>
                     <textarea id="prof-address" rows="3" placeholder="Enter complete warehouse delivery address"></textarea>
                 </div>
 
-                <button class="btn-add" onclick="saveProfile()">Save Retailer Profile</button>
+                <button class="btn-add" onclick="saveProfile()">Save User Profile</button>
             </div>
         </section>
 
         <section id="cart-page" class="page">
-            <h2 style="margin-bottom: 1.25rem;">Your Wholesale Order</h2>
+            <h2 style="margin-bottom: 1.25rem;">Your Cart Summary</h2>
             <div id="cart-items" class="cart-list"></div>
             
             <div class="cart-summary" id="cart-summary-box" style="display:none;">
                 <div>
-                    <span style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">Total Payable Amount</span>
+                    <span style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">Total Amount</span>
                     <h2 style="font-size: 1.8rem; color: var(--text-main);">₹<span id="cart-total">0</span></h2>
                 </div>
                 <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
-                    <select id="payment-method" style="padding: 0.75rem; border-radius: 8px; border: 1.5px solid var(--border); font-weight: 700;">
+                    <select id="payment-method" class="payment-select">
                         <option value="voltkhata">⚡ VoltKhata Credit Line</option>
-                        <option value="card">UPI / Debit Card / NetBanking</option>
+                        <option value="cod">💵 Cash on Delivery (COD)</option>
+                        <option value="card">💳 UPI / Card / NetBanking</option>
                     </select>
-                    <button class="btn-add" style="width: auto; padding: 0.75rem 1.5rem;" onclick="processCheckout()">Confirm & Place Order</button>
+                    <button class="btn-add" style="width: auto; padding: 0.85rem 1.75rem;" onclick="processCheckout()">Confirm & Place Order</button>
                 </div>
             </div>
         </section>
     </main>
 
+    <div id="mfr-modal" class="modal-overlay" onclick="closeModalOnBackdrop(event)">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeMfrModal()">&times;</button>
+            <h3 style="color: var(--accent-cyan); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Verified Manufacturer</h3>
+            <h2 id="modal-mfr-name" style="margin: 0.25rem 0 1rem 0; font-size: 1.4rem;">Company Name</h2>
+            
+            <p id="modal-mfr-desc" style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;"></p>
+
+            <div class="mfr-detail-grid">
+                <div class="mfr-detail-item">
+                    <label>Location</label>
+                    <span id="modal-mfr-loc">City, Country</span>
+                </div>
+                <div class="mfr-detail-item">
+                    <label>Established</label>
+                    <span id="modal-mfr-est">2010</span>
+                </div>
+                <div class="mfr-detail-item">
+                    <label>Certifications</label>
+                    <span id="modal-mfr-cert">ISO 9001</span>
+                </div>
+                <div class="mfr-detail-item">
+                    <label>Trust Score</label>
+                    <span id="modal-mfr-rating" style="color: var(--success);">4.9 ★</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // --- SAFE STORAGE HELPERS (Prevents crashes in restricted browser preview sandboxes) ---
+        // --- SAFE STORAGE HELPERS ---
         function getStorage(key, defaultVal) {
             try {
                 const item = localStorage.getItem(key);
@@ -451,31 +647,80 @@
             } catch(e) {}
         }
 
-        // --- 16 PRODUCTS CATALOG ---
+        // --- 16 EXPANDED PRODUCTS CATALOGUE WITH MANUFACTURER INFO ---
         const products = [
-            { id: 101, category: "Converters & Inverters", name: "Heavy-Duty DC-DC Converter (72V to 12V)", price: 14200, bulkPrice: 12000, desc: "High efficiency step-down converter for heavy duty EV electronics." },
-            { id: 102, category: "Converters & Inverters", name: "Isolated DC-DC Step Down Converter (48V to 12V)", price: 8500, bulkPrice: 7200, desc: "Industrial-grade isolated step down power converter with surge protection." },
-            { id: 103, category: "Converters & Inverters", name: "Pure Sine Wave Off-Grid Inverter 3KW", price: 22000, bulkPrice: 19500, desc: "Heavy duty off-grid power inverter for electric utility vehicles." },
-            { id: 104, category: "Motors & Controllers", name: "Intelligent EV Motor Controller (3000W)", price: 8500, bulkPrice: 7200, desc: "Sine wave vector controller with regenerative braking support." },
-            { id: 105, category: "Motors & Controllers", name: "High-Torque BLDC Hub Motor 72V 4000W", price: 18500, bulkPrice: 16000, desc: "Waterproof brushless hub motor designed for high payload 3-wheelers." },
-            { id: 106, category: "Motors & Controllers", name: "Permanent Magnet Synchronous Motor (PMSM) 10kW", price: 45000, bulkPrice: 39000, desc: "Liquid-cooled PMSM high speed motor ideal for light commercial EVs." },
-            { id: 107, category: "Battery & BMS", name: "Lithium-Ion Battery Pack (72V 30Ah)", price: 25000, bulkPrice: 23500, desc: "High power density NMC lithium pack with built-in active balance." },
-            { id: 108, category: "Battery & BMS", name: "Smart LFP Battery Pack (60V 42Ah)", price: 32000, bulkPrice: 28500, desc: "Long cycle life LiFePO4 battery pack for daily commercial runs." },
-            { id: 109, category: "Battery & BMS", name: "Smart Bluetooth BMS 16S-24S 150A", price: 4800, bulkPrice: 3900, desc: "Programmable BMS module with real-time temperature monitoring app." },
-            { id: 110, category: "Battery & BMS", name: "Active Battery Cell Balancer 5A", price: 2100, bulkPrice: 1650, desc: "Inductive energy transfer cell balancer module for longer battery life." },
-            { id: 111, category: "Chargers & Cables", name: "Fast EV Charger 72V 15A Smart Metal Body", price: 6800, bulkPrice: 5500, desc: "Automotive-grade fast battery charger with auto cut-off protection." },
-            { id: 112, category: "Chargers & Cables", name: "Portable Type-2 AC EV Charger 3.3kW", price: 11500, bulkPrice: 9800, desc: "Compact wallbox charger with LED charging status display." },
-            { id: 113, category: "Chargers & Cables", name: "Heavy Duty Pure Copper EV Charging Cable (5m)", price: 2400, bulkPrice: 1850, desc: "Flame-retardant TPE insulation charging cable with dust cap." },
-            { id: 114, category: "Spares & Electronics", name: "Electronic Twist Throttle with Digital Display", price: 1200, bulkPrice: 850, desc: "Hall-sensor throttle grip with integrated key lock and battery meter." },
-            { id: 115, category: "Spares & Electronics", name: "Smart LCD Digital Dashboard Instrument Cluster", price: 3500, bulkPrice: 2800, desc: "CAN-bus enabled speedo dashboard displaying trip, SOC, and errors." },
-            { id: 116, category: "Spares & Electronics", name: "Waterproof EV Wiring Harness Assembly Kit", price: 2800, bulkPrice: 2100, desc: "Complete braided harness wiring kit with automotive connectors." }
+            { 
+                id: 101, category: "Converters & Inverters", name: "Heavy-Duty DC-DC Converter (72V to 12V)", price: 14200, bulkPrice: 12000, desc: "High efficiency step-down converter for heavy duty EV electronics.",
+                mfr: { name: "Voltaic Power Systems", location: "Gurugram, Haryana", est: "2014", cert: "ISO 9001, CE Certified", rating: "4.9 ★", desc: "Leading manufacturer of industrial automotive power conversion equipment." }
+            },
+            { 
+                id: 102, category: "Converters & Inverters", name: "Isolated DC-DC Step Down Converter (48V to 12V)", price: 8500, bulkPrice: 7200, desc: "Industrial-grade isolated step down power converter with surge protection.",
+                mfr: { name: "NexGen Power Tech", location: "Bengaluru, Karnataka", est: "2016", cert: "RoHS, ISO 14001", rating: "4.8 ★", desc: "Specializes in high-frequency power electronics and isolated circuits." }
+            },
+            { 
+                id: 103, category: "Converters & Inverters", name: "Pure Sine Wave Off-Grid Inverter 3KW", price: 22000, bulkPrice: 19500, desc: "Heavy duty off-grid power inverter for electric utility vehicles.",
+                mfr: { name: "ElectroGrid Solutions", location: "Ahmedabad, Gujarat", est: "2011", cert: "BIS Approved, CE", rating: "4.7 ★", desc: "Pioneers in high-capacity solar and electric drive power inverters." }
+            },
+            { 
+                id: 104, category: "Motors & Controllers", name: "Intelligent EV Motor Controller (3000W)", price: 8500, bulkPrice: 7200, desc: "Sine wave vector controller with regenerative braking support.",
+                mfr: { name: "MotionDynamics India", location: "Pune, Maharashtra", est: "2015", cert: "Automotive Grade AEC-Q", rating: "4.9 ★", desc: "Precision motor control algorithms for two-wheelers and three-wheelers." }
+            },
+            { 
+                id: 105, category: "Motors & Controllers", name: "High-Torque BLDC Hub Motor 72V 4000W", price: 18500, bulkPrice: 16000, desc: "Waterproof brushless hub motor designed for high payload 3-wheelers.",
+                mfr: { name: "TorqueDrive Motors", location: "Coimbatore, Tamil Nadu", est: "2013", cert: "IP67 Certified, ISO 9001", rating: "5.0 ★", desc: "Heavy-duty electric powertrain components engineered for heavy payloads." }
+            },
+            { 
+                id: 106, category: "Motors & Controllers", name: "Permanent Magnet Synchronous Motor (PMSM) 10kW", price: 45000, bulkPrice: 39000, desc: "Liquid-cooled PMSM high speed motor ideal for light commercial EVs.",
+                mfr: { name: "AeroVolt Dynamics", location: "Chennai, Tamil Nadu", est: "2017", cert: "ARAI Approved, ISO", rating: "4.9 ★", desc: "High-density permanent magnet motors for commercial fleet electrification." }
+            },
+            { 
+                id: 107, category: "Battery & BMS", name: "Lithium-Ion Battery Pack (72V 30Ah)", price: 25000, bulkPrice: 23500, desc: "High power density NMC lithium pack with built-in active balance.",
+                mfr: { name: "CellVolt Energy", location: "Hyderabad, Telangana", est: "2018", cert: "UN38.3, AIS-156 Phase 2", rating: "4.9 ★", desc: "Safety-tested smart lithium battery packs for Indian road conditions." }
+            },
+            { 
+                id: 108, category: "Battery & BMS", name: "Smart LFP Battery Pack (60V 42Ah)", price: 32000, bulkPrice: 28500, desc: "Long cycle life LiFePO4 battery pack for daily commercial runs.",
+                mfr: { name: "PowerLithium Labs", location: "Bengaluru, Karnataka", est: "2019", cert: "AIS-156 Certified", rating: "4.8 ★", desc: "Thermal-runaway protected LiFePO4 storage systems." }
+            },
+            { 
+                id: 109, category: "Battery & BMS", name: "Smart Bluetooth BMS 16S-24S 150A", price: 4800, bulkPrice: 3900, desc: "Programmable BMS module with real-time temperature monitoring app.",
+                mfr: { name: "BMS Core Tech", location: "Noida, Uttar Pradesh", est: "2020", cert: "CE, FCC, RoHS", rating: "4.7 ★", desc: "Embedded IoT battery management systems and telemetry devices." }
+            },
+            { 
+                id: 110, category: "Battery & BMS", name: "Active Battery Cell Balancer 5A", price: 2100, bulkPrice: 1650, desc: "Inductive energy transfer cell balancer module for longer battery life.",
+                mfr: { name: "CircuitPro India", location: "Vadodara, Gujarat", est: "2015", cert: "ISO 9001", rating: "4.8 ★", desc: "Dedicated manufacturer of high-precision PCB electronics for batteries." }
+            },
+            { 
+                id: 111, category: "Chargers & Cables", name: "Fast EV Charger 72V 15A Smart Metal Body", price: 6800, bulkPrice: 5500, desc: "Automotive-grade fast battery charger with auto cut-off protection.",
+                mfr: { name: "AmpereCharge Tech", location: "Rajkot, Gujarat", est: "2016", cert: "BIS, IP65 Waterproof", rating: "4.9 ★", desc: "Robust metal-body smart chargers with multi-stage safety protection." }
+            },
+            { 
+                id: 112, category: "Chargers & Cables", name: "Portable Type-2 AC EV Charger 3.3kW", price: 11500, bulkPrice: 9800, desc: "Compact wallbox charger with LED charging status display.",
+                mfr: { name: "VoltPlug Chargers", location: "Gurugram, Haryana", est: "2018", cert: "IEC 62196-2, CE", rating: "4.8 ★", desc: "Universal AC charging stations and home-charging accessories." }
+            },
+            { 
+                id: 113, category: "Chargers & Cables", name: "Heavy Duty Pure Copper EV Charging Cable (5m)", price: 2400, bulkPrice: 1850, desc: "Flame-retardant TPE insulation charging cable with dust cap.",
+                mfr: { name: "WireTech Industries", location: "Faridabad, Haryana", est: "2008", cert: "ISI Mark, Flame Retardant", rating: "5.0 ★", desc: "Heavy industrial automotive cable harness and pure copper wiring." }
+            },
+            { 
+                id: 114, category: "Spares & Electronics", name: "Electronic Twist Throttle with Digital Display", price: 1200, bulkPrice: 850, desc: "Hall-sensor throttle grip with integrated key lock and battery meter.",
+                mfr: { name: "RiderControls", location: "Ludhiana, Punjab", est: "2012", cert: "ISO Certified", rating: "4.7 ★", desc: "Ergonomic handlebar controllers and throttles for light electric vehicles." }
+            },
+            { 
+                id: 115, category: "Spares & Electronics", name: "Smart LCD Digital Dashboard Instrument Cluster", price: 3500, bulkPrice: 2800, desc: "CAN-bus enabled speedo dashboard displaying trip, SOC, and errors.",
+                mfr: { name: "DashMatrix Electronics", location: "Pune, Maharashtra", est: "2017", cert: "AEC-Q100, IP67", rating: "4.9 ★", desc: "Custom digital instrumentation displays for smart electric scooters." }
+            },
+            { 
+                id: 116, category: "Spares & Electronics", name: "Waterproof EV Wiring Harness Assembly Kit", price: 2800, bulkPrice: 2100, desc: "Complete braided harness wiring kit with automotive connectors.",
+                mfr: { name: "FlexiHarness Corp", location: "Kolkata, West Bengal", est: "2014", cert: "ISO 9001", rating: "4.8 ★", desc: "Pre-molded, flame-proof wiring harnesses for electric mobility OEM systems." }
+            }
         ];
 
-        // --- GLOBAL STATE ---
+        // --- GLOBAL APP STATE ---
         let cart = getStorage('vb_cart', []);
         let isPhoneVerified = getStorage('vb_phone_verified', false);
         let khataBalance = getStorage('vb_khata_limit', 50000);
         let currentCategory = "All";
+        let searchQuery = "";
 
         // --- NAVIGATION ---
         function navigate(pageId) {
@@ -492,7 +737,12 @@
             document.getElementById('khata-limit').innerText = khataBalance.toLocaleString('en-IN');
         }
 
-        // --- CATEGORIES & CATALOG ---
+        // --- SEARCH & CATEGORY FILTERS ---
+        function handleSearch() {
+            searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+            renderCatalog();
+        }
+
         function renderCategoryPills() {
             const categories = ["All", ...new Set(products.map(p => p.category))];
             const pillContainer = document.getElementById('category-pills');
@@ -510,9 +760,22 @@
             renderCatalog();
         }
 
+        // --- CATALOGUE RENDER ---
         function renderCatalog() {
             const container = document.getElementById('product-list');
-            const filtered = currentCategory === "All" ? products : products.filter(p => p.category === currentCategory);
+            
+            const filtered = products.filter(p => {
+                const matchesCategory = (currentCategory === "All" || p.category === currentCategory);
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery) || 
+                                      p.category.toLowerCase().includes(searchQuery) ||
+                                      p.mfr.name.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 3rem;">No products found matching your criteria.</div>`;
+                return;
+            }
 
             container.innerHTML = filtered.map(p => `
                 <div class="card">
@@ -520,6 +783,11 @@
                         <div class="category-tag">${p.category}</div>
                         <h3>${p.name}</h3>
                         <p class="desc">${p.desc}</p>
+
+                        <div class="manufacturer-row">
+                            <span class="mfr-name">🏢 ${p.mfr.name}</span>
+                            <button class="info-btn" title="View Manufacturer Details" onclick="showMfrModal(${p.id})">ⓘ</button>
+                        </div>
                     </div>
                     <div>
                         <div class="price-box">
@@ -530,6 +798,31 @@
                     </div>
                 </div>
             `).join('');
+        }
+
+        // --- MANUFACTURER MODAL POPUP ---
+        function showMfrModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('modal-mfr-name').innerText = product.mfr.name;
+            document.getElementById('modal-mfr-desc').innerText = product.mfr.desc;
+            document.getElementById('modal-mfr-loc').innerText = product.mfr.location;
+            document.getElementById('modal-mfr-est').innerText = product.mfr.est;
+            document.getElementById('modal-mfr-cert').innerText = product.mfr.cert;
+            document.getElementById('modal-mfr-rating').innerText = product.mfr.rating;
+
+            document.getElementById('mfr-modal').style.display = 'flex';
+        }
+
+        function closeMfrModal() {
+            document.getElementById('mfr-modal').style.display = 'none';
+        }
+
+        function closeModalOnBackdrop(event) {
+            if (event.target.id === 'mfr-modal') {
+                closeMfrModal();
+            }
         }
 
         // --- CART MANAGEMENT ---
@@ -569,7 +862,7 @@
             let grandTotal = 0;
             
             if (cart.length === 0) {
-                container.innerHTML = '<div class="card" style="text-align:center; padding: 2rem;">Your cart is empty. Add items from the catalog.</div>';
+                container.innerHTML = '<div class="card" style="text-align:center; padding: 2rem;">Your cart is empty. Explore items in the catalogue.</div>';
                 summaryBox.style.display = 'none';
                 return;
             }
@@ -589,9 +882,9 @@
                             <h4 style="margin-bottom:0.3rem;">${product.name}</h4>
                             <p style="font-size:0.85rem; color: var(--text-muted);">
                                 Unit Rate: ₹${appliedPrice.toLocaleString('en-IN')} 
-                                ${isBulk ? '<span class="bulk-tag">BULK DISCOUNT</span>' : ''}
+                                ${isBulk ? '<span class="bulk-tag">BULK DISCOUNT APPLIED</span>' : ''}
                             </p>
-                            <p style="font-weight:700; margin-top:0.3rem;">Subtotal: ₹${subtotal.toLocaleString('en-IN')}</p>
+                            <p style="font-weight:700; margin-top:0.3rem; color: var(--accent-cyan);">Subtotal: ₹${subtotal.toLocaleString('en-IN')}</p>
                         </div>
                         <div class="qty-controls">
                             <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
@@ -605,7 +898,7 @@
             document.getElementById('cart-total').innerText = grandTotal.toLocaleString('en-IN');
         }
 
-        // --- CHECKOUT & VOLTKHATA LOGIC ---
+        // --- CHECKOUT & PAYMENT LOGIC ---
         function processCheckout() {
             if (cart.length === 0) return;
             
@@ -623,17 +916,19 @@
                     khataBalance -= grandTotal;
                     setStorage('vb_khata_limit', khataBalance);
                     updateKhataDisplay();
-                    finalizeOrder();
+                    finalizeOrder("Paid via VoltKhata Credit");
                 } else {
-                    alert(`Insufficient VoltKhata Limit!\n\nOrder Total: ₹${grandTotal.toLocaleString('en-IN')}\nAvailable Credit: ₹${khataBalance.toLocaleString('en-IN')}`);
+                    alert(`Insufficient VoltKhata Credit!\n\nOrder Total: ₹${grandTotal.toLocaleString('en-IN')}\nAvailable Limit: ₹${khataBalance.toLocaleString('en-IN')}`);
                 }
+            } else if (method === 'cod') {
+                finalizeOrder("Cash on Delivery (COD)");
             } else {
-                finalizeOrder();
+                finalizeOrder("Paid via Digital Payment Gateway");
             }
         }
 
-        function finalizeOrder() {
-            alert("Order placed successfully! Invoice sent to retailer profile.");
+        function finalizeOrder(paymentNote) {
+            alert(`Order Placed Successfully!\nPayment Mode: ${paymentNote}`);
             cart = [];
             setStorage('vb_cart', cart);
             updateCartBadge();
@@ -641,7 +936,7 @@
             navigate('shop');
         }
 
-        // --- PROFILE & OTP LOGIC ---
+        // --- PROFILE & OTP VERIFICATION ---
         function loadProfileData() {
             const profile = getStorage('vb_profile_data', { name: '', phone: '', address: '' });
             document.getElementById('prof-name').value = profile.name || '';
@@ -657,7 +952,7 @@
             const phone = document.getElementById('prof-phone').value;
             if (phone.length < 10) return alert("Please enter a valid 10-digit mobile number.");
             
-            alert(`OTP dispatched to ${phone}. (Use test code: 1234)`);
+            alert(`Verification OTP sent to ${phone}. (Test code: 1234)`);
             document.getElementById('otp-section').style.display = 'block';
             document.getElementById('btn-request-otp').style.display = 'none';
         }
@@ -670,7 +965,7 @@
                 alert("Phone Number Verified Successfully!");
                 lockPhoneVerification();
             } else {
-                alert("Incorrect OTP. Enter 1234 to verify.");
+                alert("Invalid OTP! Use 1234 to verify.");
             }
         }
 
@@ -693,10 +988,10 @@
             };
             
             setStorage('vb_profile_data', profileData);
-            alert("Retailer profile saved successfully!");
+            alert("User profile updated successfully!");
         }
 
-        // --- IMMEDIATE RENDER ---
+        // --- APP INITIALIZATION ---
         updateKhataDisplay();
         renderCategoryPills();
         renderCatalog();
