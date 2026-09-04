@@ -6,39 +6,42 @@
     <title>VOLTBAZAAR | B2B EV Components Marketplace</title>
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
-            --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            --khata-gradient: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
-            --card-hover-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.15), 0 8px 10px -6px rgba(79, 70, 229, 0.1);
-            
-            --bg-dark: #0f172a;
+            --primary: #4f46e5;
+            --primary-dark: #0f172a;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --danger: #e11d48;
             --bg-light: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
+            --text-dark: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
         }
 
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
             background-color: var(--bg-light);
-            color: var(--text-main);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* --- HEADER & NAV --- */
         header {
-            background: var(--bg-dark);
-            color: white;
-            padding: 1.25rem 2rem;
+            background: var(--primary-dark);
+            color: #ffffff;
+            padding: 1rem 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -46,173 +49,72 @@
             gap: 1rem;
         }
 
-        .brand-container h1 {
-            margin: 0;
-            font-size: 1.8rem;
+        .brand h1 {
+            font-size: 1.75rem;
             font-weight: 900;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             background: linear-gradient(90deg, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .brand-container p {
-            margin: 0;
+        .brand p {
             font-size: 0.75rem;
             color: #94a3b8;
-            letter-spacing: 1px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         nav {
             display: flex;
             align-items: center;
             gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         nav button {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #e2e8f0;
-            padding: 0.6rem 1.2rem;
-            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding: 0.5rem 1.25rem;
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         nav button:hover, nav button.active-nav {
-            background: white;
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+            background: #ffffff;
+            color: var(--primary-dark);
         }
 
         .khata-badge {
-            background: var(--khata-gradient);
-            color: white;
-            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+            color: #ffffff;
+            padding: 0.5rem 1.25rem;
             border-radius: 50px;
             font-weight: 700;
             font-size: 0.9rem;
-            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3);
         }
 
         /* --- HERO BANNER --- */
         .hero {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 2.5rem 2rem;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: #ffffff;
+            padding: 2rem 1.5rem;
             text-align: center;
-            border-radius: 0 0 24px 24px;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.25);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
         }
 
         .hero h2 {
-            margin: 0 0 0.5rem 0;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 800;
+            margin-bottom: 0.5rem;
         }
 
         .hero p {
-            margin: 0;
-            font-size: 1.1rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
-
-        main {
-            padding: 0 2rem 3rem 2rem;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        .page { display: none; }
-        .page.active { display: block; animation: slideUp 0.3s ease-out; }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- CATEGORIES FILTER TABS --- */
-        .category-scroll {
-            display: flex;
-            gap: 0.75rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-            margin-bottom: 2rem;
-            scrollbar-width: thin;
-        }
-
-        .cat-pill {
-            background: white;
-            border: 1px solid var(--border);
-            padding: 0.6rem 1.4rem;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.25s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .cat-pill:hover, .cat-pill.active-cat {
-            background: var(--bg-dark);
-            color: white;
-            border-color: var(--bg-dark);
-            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
-        }
-
-        /* --- PRODUCT GRID & CARDS --- */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 1.5rem;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-hover-shadow);
-            border-color: #c7d2fe;
-        }
-
-        .category-tag {
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #4f46e5;
-            background: #e0e7ff;
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            width: fit-content;
-            margin-bottom: 0.75rem;
-        }
-
-        .card h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 1.2rem;
-            color: var(--text-main);
-            line-height: 1.4;
-        }
-
-        .card p.desc
