@@ -3,66 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOLTBAZAAR | B2B EV Components Marketplace</title>
+    <title>VOLTBAZAAR | B2B EV Marketplace</title>
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-dark: #0f172a;
-            --accent: #06b6d4;
-            --success: #10b981;
-            --danger: #e11d48;
-            --bg-light: #f8fafc;
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            --accent-cyan: #06b6d4;
+            --success-green: #10b981;
+            --khata-gradient: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+            --bg-dark: #0f172a;
+            --bg-light: #f1f5f9;
             --card-bg: #ffffff;
-            --text-dark: #0f172a;
+            --text-main: #0f172a;
             --text-muted: #64748b;
-            --border: #e2e8f0;
+            --border: #cbd5e1;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
 
         body {
             background-color: var(--bg-light);
-            color: var(--text-dark);
+            color: var(--text-main);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* --- HEADER & NAV --- */
+        /* --- HEADER & NAVIGATION --- */
         header {
-            background: var(--primary-dark);
+            background: var(--bg-dark);
             color: #ffffff;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .brand h1 {
-            font-size: 1.75rem;
+        .brand-logo h1 {
+            font-size: 1.8rem;
             font-weight: 900;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             background: linear-gradient(90deg, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .brand p {
+        .brand-logo p {
             font-size: 0.75rem;
             color: #94a3b8;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
 
         nav {
@@ -76,9 +76,9 @@
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
-            padding: 0.5rem 1.25rem;
+            padding: 0.6rem 1.25rem;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -86,35 +86,622 @@
 
         nav button:hover, nav button.active-nav {
             background: #ffffff;
-            color: var(--primary-dark);
+            color: var(--bg-dark);
+            box-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
         .khata-badge {
-            background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+            background: var(--khata-gradient);
             color: #ffffff;
-            padding: 0.5rem 1.25rem;
+            padding: 0.6rem 1.25rem;
             border-radius: 50px;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3);
+            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
         }
 
         /* --- HERO BANNER --- */
         .hero {
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            background: var(--primary-gradient);
             color: #ffffff;
-            padding: 2rem 1.5rem;
+            padding: 2.5rem 1.5rem;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
         }
 
         .hero h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
             margin-bottom: 0.5rem;
         }
 
         .hero p {
-            font-size: 1rem;
-            opacity: 0.9;
+            font-size: 1.05rem;
+            opacity: 0.95;
         }
+
+        /* --- MAIN CONTAINER --- */
+        main {
+            padding: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        .page { display: none; }
+        .page.active { display: block; }
+
+        /* --- CATEGORY PILLS --- */
+        .category-scroll {
+            display: flex;
+            gap: 0.75rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cat-pill {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 0.6rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .cat-pill:hover, .cat-pill.active-cat {
+            background: var(--bg-dark);
+            color: #ffffff;
+            border-color: var(--bg-dark);
+        }
+
+        /* --- PRODUCT CARDS --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -5px rgba(0, 0, 0, 0.1);
+            border-color: #a5b4fc;
+        }
+
+        .category-tag {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #4f46e5;
+            background: #e0e7ff;
+            padding: 0.3rem 0.75rem;
+            border-radius: 50px;
+            width: fit-content;
+            margin-bottom: 0.75rem;
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .card p.desc {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .price-box {
+            background: #f8fafc;
+            padding: 0.85rem;
+            border-radius: 10px;
+            border: 1px solid #f1f5f9;
+            margin-bottom: 1rem;
+        }
+
+        .price-single {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .price-bulk {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--success-green);
+            margin-top: 0.25rem;
+        }
+
+        .btn-add {
+            background: var(--primary-gradient);
+            color: #ffffff;
+            border: none;
+            padding: 0.8rem;
+            width: 100%;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-add:hover { opacity: 0.92; }
+
+        /* --- PROFILE --- */
+        .profile-card {
+            max-width: 550px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 2.2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .form-group { margin-bottom: 1.25rem; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 0.4rem; font-size: 0.9rem; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+        .form-group input:focus, .form-group textarea:focus { border-color: #4f46e5; }
+
+        .btn-flex { display: flex; gap: 0.5rem; }
+
+        .btn-dark {
+            background: var(--bg-dark);
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .verified-badge {
+            color: #15803d;
+            background: #dcfce7;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 800;
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        /* --- CART --- */
+        .cart-list { display: flex; flex-direction: column; gap: 1rem; }
+        .cart-item {
+            background: #ffffff;
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-light);
+            padding: 0.3rem 0.6rem;
+            border-radius: 8px;
+        }
+
+        .qty-btn {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .cart-summary {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .bulk-tag {
+            background: #dcfce7;
+            color: #15803d;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-left: 0.4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-logo">
+            <h1>VOLTBAZAAR</h1>
+            <p>B2B Electric Mobility Supply Hub</p>
+        </div>
+        <nav>
+            <button onclick="navigate('shop')" id="nav-shop" class="active-nav">Catalog</button>
+            <button onclick="navigate('profile')" id="nav-profile">Profile</button>
+            <button onclick="navigate('cart')" id="nav-cart">Cart (<span id="cart-count">0</span>)</button>
+            <div class="khata-badge">
+                ⚡ VoltKhata: ₹<span id="khata-limit">50,000</span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h2>Wholesale EV Powertrains & Components</h2>
+        <p>Dynamic Wholesale Discounts Automatically Applied on Bulk Orders (>5 Units)</p>
+    </div>
+
+    <main>
+        <section id="shop-page" class="page active">
+            <div class="category-scroll" id="category-pills"></div>
+            <div id="product-list" class="grid"></div>
+        </section>
+
+        <section id="profile-page" class="page">
+            <div class="profile-card">
+                <h2 style="margin-bottom: 1.25rem;">Retailer Profile</h2>
+                <div class="form-group">
+                    <label>Business / Retailer Name</label>
+                    <input type="text" id="prof-name" placeholder="e.g. Apex ElectroMobility Pvt Ltd">
+                </div>
+
+                <div class="form-group">
+                    <label>Mobile Number (OTP Verification Required)</label>
+                    <div class="btn-flex">
+                        <input type="tel" id="prof-phone" placeholder="Enter 10-digit mobile number">
+                        <button class="btn-dark" onclick="requestOTP()" id="btn-request-otp">Send OTP</button>
+                    </div>
+                    <div id="verified-badge" class="verified-badge" style="display:none;">
+                        ✓ Phone Number Verified
+                    </div>
+                </div>
+
+                <div class="form-group" id="otp-section" style="display:none; background: #e0f2fe; padding: 1rem; border-radius: 8px;">
+                    <label style="color:#0369a1;">Enter OTP (Use Test Code: <strong>1234</strong>)</label>
+                    <div class="btn-flex" style="margin-top: 0.4rem;">
+                        <input type="text" id="prof-otp" placeholder="1234">
+                        <button class="btn-dark" onclick="verifyOTP()">Verify OTP</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Warehouse Delivery Address</label>
+                    <textarea id="prof-address" rows="3" placeholder="Enter complete warehouse delivery address"></textarea>
+                </div>
+
+                <button class="btn-add" onclick="saveProfile()">Save Retailer Profile</button>
+            </div>
+        </section>
+
+        <section id="cart-page" class="page">
+            <h2 style="margin-bottom: 1.25rem;">Your Wholesale Order</h2>
+            <div id="cart-items" class="cart-list"></div>
+            
+            <div class="cart-summary" id="cart-summary-box" style="display:none;">
+                <div>
+                    <span style="color: var(--text-muted); font-size: 0.9rem; font-weight: 600;">Total Payable Amount</span>
+                    <h2 style="font-size: 1.8rem; color: var(--text-main);">₹<span id="cart-total">0</span></h2>
+                </div>
+                <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                    <select id="payment-method" style="padding: 0.75rem; border-radius: 8px; border: 1.5px solid var(--border); font-weight: 700;">
+                        <option value="voltkhata">⚡ VoltKhata Credit Line</option>
+                        <option value="card">UPI / Debit Card / NetBanking</option>
+                    </select>
+                    <button class="btn-add" style="width: auto; padding: 0.75rem 1.5rem;" onclick="processCheckout()">Confirm & Place Order</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // --- SAFE STORAGE HELPERS (Prevents crashes in restricted browser preview sandboxes) ---
+        function getStorage(key, defaultVal) {
+            try {
+                const item = localStorage.getItem(key);
+                return item ? JSON.parse(item) : defaultVal;
+            } catch(e) {
+                return defaultVal;
+            }
+        }
+
+        function setStorage(key, val) {
+            try {
+                localStorage.setItem(key, JSON.stringify(val));
+            } catch(e) {}
+        }
+
+        // --- 16 PRODUCTS CATALOG ---
+        const products = [
+            { id: 101, category: "Converters & Inverters", name: "Heavy-Duty DC-DC Converter (72V to 12V)", price: 14200, bulkPrice: 12000, desc: "High efficiency step-down converter for heavy duty EV electronics." },
+            { id: 102, category: "Converters & Inverters", name: "Isolated DC-DC Step Down Converter (48V to 12V)", price: 8500, bulkPrice: 7200, desc: "Industrial-grade isolated step down power converter with surge protection." },
+            { id: 103, category: "Converters & Inverters", name: "Pure Sine Wave Off-Grid Inverter 3KW", price: 22000, bulkPrice: 19500, desc: "Heavy duty off-grid power inverter for electric utility vehicles." },
+            { id: 104, category: "Motors & Controllers", name: "Intelligent EV Motor Controller (3000W)", price: 8500, bulkPrice: 7200, desc: "Sine wave vector controller with regenerative braking support." },
+            { id: 105, category: "Motors & Controllers", name: "High-Torque BLDC Hub Motor 72V 4000W", price: 18500, bulkPrice: 16000, desc: "Waterproof brushless hub motor designed for high payload 3-wheelers." },
+            { id: 106, category: "Motors & Controllers", name: "Permanent Magnet Synchronous Motor (PMSM) 10kW", price: 45000, bulkPrice: 39000, desc: "Liquid-cooled PMSM high speed motor ideal for light commercial EVs." },
+            { id: 107, category: "Battery & BMS", name: "Lithium-Ion Battery Pack (72V 30Ah)", price: 25000, bulkPrice: 23500, desc: "High power density NMC lithium pack with built-in active balance." },
+            { id: 108, category: "Battery & BMS", name: "Smart LFP Battery Pack (60V 42Ah)", price: 32000, bulkPrice: 28500, desc: "Long cycle life LiFePO4 battery pack for daily commercial runs." },
+            { id: 109, category: "Battery & BMS", name: "Smart Bluetooth BMS 16S-24S 150A", price: 4800, bulkPrice: 3900, desc: "Programmable BMS module with real-time temperature monitoring app." },
+            { id: 110, category: "Battery & BMS", name: "Active Battery Cell Balancer 5A", price: 2100, bulkPrice: 1650, desc: "Inductive energy transfer cell balancer module for longer battery life." },
+            { id: 111, category: "Chargers & Cables", name: "Fast EV Charger 72V 15A Smart Metal Body", price: 6800, bulkPrice: 5500, desc: "Automotive-grade fast battery charger with auto cut-off protection." },
+            { id: 112, category: "Chargers & Cables", name: "Portable Type-2 AC EV Charger 3.3kW", price: 11500, bulkPrice: 9800, desc: "Compact wallbox charger with LED charging status display." },
+            { id: 113, category: "Chargers & Cables", name: "Heavy Duty Pure Copper EV Charging Cable (5m)", price: 2400, bulkPrice: 1850, desc: "Flame-retardant TPE insulation charging cable with dust cap." },
+            { id: 114, category: "Spares & Electronics", name: "Electronic Twist Throttle with Digital Display", price: 1200, bulkPrice: 850, desc: "Hall-sensor throttle grip with integrated key lock and battery meter." },
+            { id: 115, category: "Spares & Electronics", name: "Smart LCD Digital Dashboard Instrument Cluster", price: 3500, bulkPrice: 2800, desc: "CAN-bus enabled speedo dashboard displaying trip, SOC, and errors." },
+            { id: 116, category: "Spares & Electronics", name: "Waterproof EV Wiring Harness Assembly Kit", price: 2800, bulkPrice: 2100, desc: "Complete braided harness wiring kit with automotive connectors." }
+        ];
+
+        // --- GLOBAL STATE ---
+        let cart = getStorage('vb_cart', []);
+        let isPhoneVerified = getStorage('vb_phone_verified', false);
+        let khataBalance = getStorage('vb_khata_limit', 50000);
+        let currentCategory = "All";
+
+        // --- NAVIGATION ---
+        function navigate(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active-nav'));
+            
+            document.getElementById(pageId + '-page').classList.add('active');
+            document.getElementById('nav-' + pageId).classList.add('active-nav');
+            
+            if (pageId === 'cart') renderCart();
+        }
+
+        function updateKhataDisplay() {
+            document.getElementById('khata-limit').innerText = khataBalance.toLocaleString('en-IN');
+        }
+
+        // --- CATEGORIES & CATALOG ---
+        function renderCategoryPills() {
+            const categories = ["All", ...new Set(products.map(p => p.category))];
+            const pillContainer = document.getElementById('category-pills');
+            
+            pillContainer.innerHTML = categories.map(cat => `
+                <button class="cat-pill ${cat === currentCategory ? 'active-cat' : ''}" onclick="filterCategory('${cat}')">
+                    ${cat}
+                </button>
+            `).join('');
+        }
+
+        function filterCategory(catName) {
+            currentCategory = catName;
+            renderCategoryPills();
+            renderCatalog();
+        }
+
+        function renderCatalog() {
+            const container = document.getElementById('product-list');
+            const filtered = currentCategory === "All" ? products : products.filter(p => p.category === currentCategory);
+
+            container.innerHTML = filtered.map(p => `
+                <div class="card">
+                    <div>
+                        <div class="category-tag">${p.category}</div>
+                        <h3>${p.name}</h3>
+                        <p class="desc">${p.desc}</p>
+                    </div>
+                    <div>
+                        <div class="price-box">
+                            <div class="price-single">Unit Price: ₹${p.price.toLocaleString('en-IN')}</div>
+                            <div class="price-bulk">⚡ Bulk (>5 Units): ₹${p.bulkPrice.toLocaleString('en-IN')}</div>
+                        </div>
+                        <button class="btn-add" onclick="addToCart(${p.id})">+ Add To Order</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- CART MANAGEMENT ---
+        function addToCart(id) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ id, qty: 1 });
+            }
+            setStorage('vb_cart', cart);
+            updateCartBadge();
+            alert("Product added to cart!");
+        }
+
+        function updateQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+                setStorage('vb_cart', cart);
+                renderCart();
+                updateCartBadge();
+            }
+        }
+
+        function updateCartBadge() {
+            const count = cart.reduce((total, item) => total + item.qty, 0);
+            document.getElementById('cart-count').innerText = count;
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            const summaryBox = document.getElementById('cart-summary-box');
+            let grandTotal = 0;
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<div class="card" style="text-align:center; padding: 2rem;">Your cart is empty. Add items from the catalog.</div>';
+                summaryBox.style.display = 'none';
+                return;
+            }
+
+            summaryBox.style.display = 'flex';
+            container.innerHTML = cart.map(item => {
+                const product = products.find(p => p.id === item.id);
+                const isBulk = item.qty > 5;
+                const appliedPrice = isBulk ? product.bulkPrice : product.price;
+                const subtotal = appliedPrice * item.qty;
+                
+                grandTotal += subtotal;
+                
+                return `
+                    <div class="cart-item">
+                        <div>
+                            <h4 style="margin-bottom:0.3rem;">${product.name}</h4>
+                            <p style="font-size:0.85rem; color: var(--text-muted);">
+                                Unit Rate: ₹${appliedPrice.toLocaleString('en-IN')} 
+                                ${isBulk ? '<span class="bulk-tag">BULK DISCOUNT</span>' : ''}
+                            </p>
+                            <p style="font-weight:700; margin-top:0.3rem;">Subtotal: ₹${subtotal.toLocaleString('en-IN')}</p>
+                        </div>
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+                            <span style="font-weight:700; min-width:20px; text-align:center;">${item.qty}</span>
+                            <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('cart-total').innerText = grandTotal.toLocaleString('en-IN');
+        }
+
+        // --- CHECKOUT & VOLTKHATA LOGIC ---
+        function processCheckout() {
+            if (cart.length === 0) return;
+            
+            let grandTotal = 0;
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.id);
+                const appliedPrice = item.qty > 5 ? product.bulkPrice : product.price;
+                grandTotal += appliedPrice * item.qty;
+            });
+
+            const method = document.getElementById('payment-method').value;
+            
+            if (method === 'voltkhata') {
+                if (khataBalance >= grandTotal) {
+                    khataBalance -= grandTotal;
+                    setStorage('vb_khata_limit', khataBalance);
+                    updateKhataDisplay();
+                    finalizeOrder();
+                } else {
+                    alert(`Insufficient VoltKhata Limit!\n\nOrder Total: ₹${grandTotal.toLocaleString('en-IN')}\nAvailable Credit: ₹${khataBalance.toLocaleString('en-IN')}`);
+                }
+            } else {
+                finalizeOrder();
+            }
+        }
+
+        function finalizeOrder() {
+            alert("Order placed successfully! Invoice sent to retailer profile.");
+            cart = [];
+            setStorage('vb_cart', cart);
+            updateCartBadge();
+            renderCart();
+            navigate('shop');
+        }
+
+        // --- PROFILE & OTP LOGIC ---
+        function loadProfileData() {
+            const profile = getStorage('vb_profile_data', { name: '', phone: '', address: '' });
+            document.getElementById('prof-name').value = profile.name || '';
+            document.getElementById('prof-phone').value = profile.phone || '';
+            document.getElementById('prof-address').value = profile.address || '';
+            
+            if (isPhoneVerified) {
+                lockPhoneVerification();
+            }
+        }
+
+        function requestOTP() {
+            const phone = document.getElementById('prof-phone').value;
+            if (phone.length < 10) return alert("Please enter a valid 10-digit mobile number.");
+            
+            alert(`OTP dispatched to ${phone}. (Use test code: 1234)`);
+            document.getElementById('otp-section').style.display = 'block';
+            document.getElementById('btn-request-otp').style.display = 'none';
+        }
+
+        function verifyOTP() {
+            const otp = document.getElementById('prof-otp').value;
+            if (otp === "1234") {
+                isPhoneVerified = true;
+                setStorage('vb_phone_verified', true);
+                alert("Phone Number Verified Successfully!");
+                lockPhoneVerification();
+            } else {
+                alert("Incorrect OTP. Enter 1234 to verify.");
+            }
+        }
+
+        function lockPhoneVerification() {
+            document.getElementById('otp-section').style.display = 'none';
+            document.getElementById('btn-request-otp').style.display = 'none';
+            document.getElementById('verified-badge').style.display = 'inline-block';
+            document.getElementById('prof-phone').disabled = true;
+        }
+
+        function saveProfile() {
+            if (!isPhoneVerified) {
+                return alert("Please verify your phone number with OTP first.");
+            }
+            
+            const profileData = {
+                name: document.getElementById('prof-name').value,
+                phone: document.getElementById('prof-phone').value,
+                address: document.getElementById('prof-address').value
+            };
+            
+            setStorage('vb_profile_data', profileData);
+            alert("Retailer profile saved successfully!");
+        }
+
+        // --- IMMEDIATE RENDER ---
+        updateKhataDisplay();
+        renderCategoryPills();
+        renderCatalog();
+        updateCartBadge();
+        loadProfileData();
+    </script>
+</body>
+</html>
